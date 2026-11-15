@@ -5,10 +5,10 @@ sources = ${wildcard *.c libs/*.c}
 objects = ${patsubst %.c, build/%.o, $(sources)}
 
 all: $(objects)
-	$(CC) -o main $(objects) $(CFLAGS)
+	$(CC) -o build/spam $(objects) $(CFLAGS)
 
 build/%.o: %.c
 	$(CC) -c $^ -o $@ $(CFLAGS)
 
 clean:
-	rm -f $(objects)
+	rm -f build/spam $(objects)
