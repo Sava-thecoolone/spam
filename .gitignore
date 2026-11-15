@@ -1,0 +1,7 @@
+*
+!*.*
+!*/
+*.o
+!BUILD GOES HERE
+.vscode/
+.git/

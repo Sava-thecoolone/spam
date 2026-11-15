@@ -1,0 +1,16 @@
+// #define ANSI_START "\x1B["
+// #define ANSI_BLACK "30"
+// #define ANSI_RED "31"
+// #define ANSI_GREEN "32"
+// #define ANSI_YELLOW "33"
+// #define ANSI_BLUE "34"
+// #define ANSI_MAGENTA "35"
+// #define ANSI_CYAN "36"
+// #define ANSI_WHITE "37"
+// #define ANSI_END "m"
+
+#define ANSI_RESET "\x1B[m"
+
+#define ANSI_INFO "\x1B[36m"
+#define ANSI_VINFO "\x1B[90m"
+#define ANSI_ERROR "\x1B[31m"
