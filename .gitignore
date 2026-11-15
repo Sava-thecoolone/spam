@@ -3,5 +3,7 @@
 !*/
 *.o
 !BUILD GOES HERE
+!Makefile
+!LICENSE
 .vscode/
 .git/
