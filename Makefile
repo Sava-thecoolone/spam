@@ -2,12 +2,12 @@ CC = gcc
 override CFLAGS += -Wall -Wextra -pedantic
 
 sources = ${wildcard *.c libs/*.c}
-objects = ${patsubst %.c, build/%.o, $(sources)}
+objects = ${patsubst %.c,build/%.o,$(sources)}
 
 all: $(objects)
 	$(CC) -o build/spam $(objects) $(CFLAGS)
 
-build/%.o: %.c
+$(objects): build/%.o: %.c
 	$(CC) -c $^ -o $@ $(CFLAGS)
 
 clean:

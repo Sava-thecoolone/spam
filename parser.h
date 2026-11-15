@@ -4,7 +4,7 @@
 #include "macro.h"
 #include "ast.h"
 
-void add_macro(struct parser_st *st, struct token tok);
+void add_macro(struct parser_st *st, struct macro_entry *mac);
 
 // parser helper, returns current token
 struct token peek(struct parser_st *st);

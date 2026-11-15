@@ -34,14 +34,14 @@ int main(int argc, char **argv) {
     fread(input, sizeof(char), inplen, pinput);
     input[inplen] = '\0';
     fclose(pinput);
-    struct tokens toks = lex(input, argv[1], rules);
+    struct token_da toks = lex(input, argv[1], rules);
     for (int i = 0; i < toks.count; i++) {
-        printf("[%d %s] ", toks.toks[i].type, toks.toks[i].str);
+        printf("[%d %s] ", toks.items[i].type, toks.items[i].str);
     }
     printf("\n");
     print_info("parsing...\n");
-    struct parser_st state = {&toks, 0, hashmap_new(sizeof(struct macro), 0, 0, 0, macro_hash, macro_compare, NULL, NULL)};
-    struct astnode ast = parse_expr(&state);
+    struct parser_st state = {&toks, 0, hashmap_new(sizeof(struct macro_entry), 0, 0, 0, macro_hash, macro_compare, NULL, NULL)};
+    struct astnode ast = parse(&state);
     free_tokens(toks);
     print_ast(ast);
     printf("\n");

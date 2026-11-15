@@ -1,0 +1,4 @@
+#square = (x) x*x;
+print square(10) to message1
+#tsquare = [x] x*x;
+print tsquare 10 to message1

@@ -32,9 +32,9 @@ char *trimleft(char *str, struct source_pos *err) {
 }
 
 // lex char*, returns token da
-struct tokens lex(char *str, char *file, Regex *rules) {
+struct token_da lex(char *str, char *file, Regex *rules) {
     print_info("lexing...\n");
-    struct tokens toks = {0};
+    struct token_da toks = {0};
     struct source_pos err = {.at.from=str, .file=file};
     char *newline = strchr(str, '\n');
     if (newline != NULL) err.at.to = newline;
@@ -51,7 +51,8 @@ struct tokens lex(char *str, char *file, Regex *rules) {
                 char *new = malloc((m.matchLength+1)*sizeof(char));
                 memcpy(new, str, m.matchLength);
                 new[m.matchLength] = '\0';
-                da_append(&toks, (struct token){new, i, err});
+                struct token tok = (struct token){new, i, err};
+                da_append(toks, tok);
                 err.offset += m.matchLength;
                 str += m.matchLength;
                 found_match = true;
@@ -60,6 +61,7 @@ struct tokens lex(char *str, char *file, Regex *rules) {
         }
         if (!found_match) print_perr("invalid token\n", err);
     }
-    da_append(&toks, (struct token){strdup(""), TOK_EOF, err});
+    struct token tok = (struct token){strdup(""), TOK_EOF, err};
+    da_append(toks, tok);
     return toks;
 }

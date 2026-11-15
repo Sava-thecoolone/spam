@@ -2,15 +2,29 @@
 #include "libs/hashmap.h"
 #include "ast.h"
 
-struct macro_data {
-    char **argnames;
+struct macro_argument {
+    char *name;
+    bool lit;
+};
+
+// marco argument dynamic array
+struct macro_argument_da {
+    struct macro_argument *items;
+    int count;
+    int capacity;
+};
+
+// parser macro
+struct macro {
+    struct macro_argument_da args;
+    bool lit;
     struct astnode body;
 };
 
-// parser macros
-struct macro {
+// helper for hashmap
+struct macro_entry {
     char *str;
-    struct macro_data data;
+    struct macro data;
 };
 
 // helper for hashmap

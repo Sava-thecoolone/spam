@@ -4,10 +4,11 @@
 
 // parser node type
 enum NodeType {
+    NODE_BLOCK,
     NODE_OP,
     NODE_LITERAL,
-    NODE_SET,
-    NODE_FUNC,
+    NODE_ASSIGN,
+    NODE_FUNC, // todo: use this
     NODE_MACRO,
 };
 
@@ -28,20 +29,31 @@ struct astnode {
     void *data;
 };
 
+// ast node dynamic array
+struct astnode_da {
+    struct astnode *items;
+    int count;
+    int capacity;
+};
+
+struct ast_block_data {
+    struct astnode_da nodes;
+};
+
 struct ast_binop_data {
     char *op;
     struct astnode left;
     struct astnode right;
 };
 
-struct ast_set_data {
+struct ast_assign_data {
     char *name;
     struct astnode expr;
 };
 
 // parser state
 struct parser_st {
-    struct tokens *toks;
+    struct token_da *toks;
     int pos;
     struct hashmap *macros;
 };
